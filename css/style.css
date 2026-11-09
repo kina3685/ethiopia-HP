@@ -339,6 +339,15 @@ body.modal-open {
 
   .recommend-grid { flex-direction: column; }
 
+  .recommend-card {
+    flex: 1 1 auto;
+    max-width: none;
+  }
+
+  .recommend-card img {
+    height: 240px;
+  }
+
   .spots-grid { grid-template-columns: 1fr; }
 
   .profile-content { flex-direction: column; text-align: center; }
