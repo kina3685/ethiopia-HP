@@ -366,9 +366,29 @@ img {
 
 /* Pricing section */
 .pricing-note {
-  margin: -25px 0 32px;
+  margin: -25px 0 12px;
   font-size: 13px;
   color: var(--color-text-soft);
+}
+
+.pricing-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 32px;
+  padding: 14px 18px;
+  background: var(--color-placeholder);
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-text-soft);
+}
+
+.pricing-disclaimer::before {
+  content: "\24D8";
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--color-primary-dark);
 }
 
 .price-grid {

@@ -186,9 +186,36 @@
     });
   }
 
+  function formatYearMonth(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    return `${year}${month}`;
+  }
+
+  function formatMonthEndLabel(date) {
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    return `${lastDay.getFullYear()}年${lastDay.getMonth() + 1}月${lastDay.getDate()}日`;
+  }
+
+  const now = new Date();
+  const currentYearMonth = formatYearMonth(now);
+  const currentMonthEndLabel = formatMonthEndLabel(now);
+
   const couponButtons = document.querySelectorAll(".coupon-card__code");
   couponButtons.forEach((button) => {
     const textEl = button.querySelector(".coupon-card__code-text");
+
+    const baseCode = button.dataset.code;
+    const monthlyCode = `${baseCode}-${currentYearMonth}`;
+    button.dataset.code = monthlyCode;
+    textEl.textContent = `CODE: ${monthlyCode}`;
+
+    const card = button.closest(".coupon-card");
+    const expiryEl = card ? card.querySelector(".coupon-card__expiry") : null;
+    if (expiryEl) {
+      expiryEl.textContent = `有効期限：${currentMonthEndLabel}まで`;
+    }
+
     const originalLabel = textEl.textContent;
     let resetTimer = null;
 
