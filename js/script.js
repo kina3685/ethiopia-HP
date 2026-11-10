@@ -51,4 +51,54 @@
       closeModal();
     }
   });
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise((resolve, reject) => {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        resolve();
+      } catch (err) {
+        reject(err);
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    });
+  }
+
+  const couponButtons = document.querySelectorAll(".coupon-card__code");
+  couponButtons.forEach((button) => {
+    const textEl = button.querySelector(".coupon-card__code-text");
+    const originalLabel = textEl.textContent;
+    let resetTimer = null;
+
+    button.addEventListener("click", () => {
+      copyText(button.dataset.code).then(
+        () => {
+          window.clearTimeout(resetTimer);
+          button.classList.add("is-copied");
+          textEl.textContent = "コピーしました";
+          resetTimer = window.setTimeout(() => {
+            button.classList.remove("is-copied");
+            textEl.textContent = originalLabel;
+          }, 1500);
+        },
+        () => {
+          textEl.textContent = "コピーに失敗しました";
+          resetTimer = window.setTimeout(() => {
+            textEl.textContent = originalLabel;
+          }, 1500);
+        }
+      );
+    });
+  });
 })();

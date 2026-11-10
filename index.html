@@ -16,6 +16,7 @@
   <nav class="site-nav">
     <a href="#recommend">私のおすすめのスポット紹介</a>
     <a href="#spots">スポット紹介</a>
+    <a href="#coupons">クーポン・割引券</a>
     <a href="#profile">著者プロフィール</a>
   </nav>
 </header>
@@ -43,17 +44,17 @@
   <section id="recommend" class="section">
     <h2 class="section-title">私のおすすめのスポット紹介</h2>
     <div class="recommend-grid">
-      <article class="recommend-card">
+      <a class="recommend-card" href="articles/spot-a.html" aria-label="スポットAの記事を読む">
         <img src="assets/images/spot-st-george-church.png" alt="聖ジョージ教会の空撮">
         <h3>スポットA</h3>
         <p>スポットの内容記載</p>
         <p>xxxxxxxxxxxxxxx</p>
-      </article>
-      <article class="recommend-card">
+      </a>
+      <a class="recommend-card" href="articles/spot-b.html" aria-label="スポットBの記事を読む">
         <img src="assets/images/dallol-wonders-3.png" alt="ダロル奇観の風景">
         <h3>スポットB</h3>
         <p>スポットの内容記載</p>
-      </article>
+      </a>
     </div>
   </section>
 
@@ -95,6 +96,54 @@
         <img src="assets/images/dallol-wonders-3.png" alt="ダロル奇観の風景">
         <h3>スポットA</h3>
         <p>スポットの内容記載</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="coupons" class="section">
+    <h2 class="section-title section-title--small">お得なクーポン・割引券</h2>
+    <div class="coupon-grid">
+      <article class="coupon-card">
+        <div class="coupon-card__rate">
+          <span class="coupon-card__percent">10<small>%</small></span>
+          <span class="coupon-card__off">OFF</span>
+        </div>
+        <div class="coupon-card__body">
+          <h3>早期予約割引</h3>
+          <p>出発の60日前までのご予約が対象の割引記載</p>
+          <button type="button" class="coupon-card__code" data-code="EARLY10">
+            <span class="coupon-card__code-text">CODE: EARLY10</span>
+          </button>
+          <p class="coupon-card__expiry">有効期限：記載</p>
+        </div>
+      </article>
+      <article class="coupon-card">
+        <div class="coupon-card__rate">
+          <span class="coupon-card__percent">15<small>%</small></span>
+          <span class="coupon-card__off">OFF</span>
+        </div>
+        <div class="coupon-card__body">
+          <h3>グループ割引</h3>
+          <p>4名様以上でのご予約が対象の割引記載</p>
+          <button type="button" class="coupon-card__code" data-code="GROUP15">
+            <span class="coupon-card__code-text">CODE: GROUP15</span>
+          </button>
+          <p class="coupon-card__expiry">有効期限：記載</p>
+        </div>
+      </article>
+      <article class="coupon-card">
+        <div class="coupon-card__rate">
+          <span class="coupon-card__percent">20<small>%</small></span>
+          <span class="coupon-card__off">OFF</span>
+        </div>
+        <div class="coupon-card__body">
+          <h3>リピーター限定割引</h3>
+          <p>2回目以降のご予約が対象の割引記載</p>
+          <button type="button" class="coupon-card__code" data-code="AGAIN20">
+            <span class="coupon-card__code-text">CODE: AGAIN20</span>
+          </button>
+          <p class="coupon-card__expiry">有効期限：記載</p>
+        </div>
       </article>
     </div>
   </section>
