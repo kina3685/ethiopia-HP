@@ -88,6 +88,81 @@
     }
   });
 
+  const planModal = document.getElementById("planModal");
+  const planModalBadge = document.getElementById("planModalBadge");
+  const planModalTitle = document.getElementById("planModalTitle");
+  const planModalPrice = document.getElementById("planModalPrice");
+  const planModalFeatures = document.getElementById("planModalFeatures");
+  const planModalClose = document.getElementById("planModalClose");
+  const planCard = document.getElementById("standardPlanCard");
+
+  let lastFocusedPlanElement = null;
+
+  function openPlanModal(card) {
+    lastFocusedPlanElement = card;
+
+    const badge = card.querySelector(".price-card__badge");
+    const name = card.querySelector(".price-card__name");
+    const amount = card.querySelector(".price-card__amount");
+    const unit = card.querySelector(".price-card__unit");
+    const features = card.querySelectorAll(".price-card__features li");
+
+    planModalBadge.textContent = badge ? badge.textContent : "";
+    planModalTitle.textContent = name ? name.textContent : "";
+    planModalPrice.innerHTML = "";
+    if (amount) {
+      planModalPrice.appendChild(document.createTextNode(amount.textContent));
+    }
+    if (unit) {
+      const unitSpan = document.createElement("span");
+      unitSpan.textContent = unit.textContent;
+      planModalPrice.appendChild(unitSpan);
+    }
+
+    planModalFeatures.innerHTML = "";
+    features.forEach((li) => {
+      const item = document.createElement("li");
+      item.innerHTML = li.innerHTML;
+      planModalFeatures.appendChild(item);
+    });
+
+    planModal.hidden = false;
+    document.body.classList.add("modal-open");
+    planModalClose.focus();
+  }
+
+  function closePlanModal() {
+    planModal.hidden = true;
+    document.body.classList.remove("modal-open");
+    if (lastFocusedPlanElement) {
+      lastFocusedPlanElement.focus();
+    }
+  }
+
+  if (planCard && planModal) {
+    planCard.addEventListener("click", () => openPlanModal(planCard));
+    planCard.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openPlanModal(planCard);
+      }
+    });
+
+    planModalClose.addEventListener("click", closePlanModal);
+
+    planModal.addEventListener("click", (event) => {
+      if (event.target === planModal) {
+        closePlanModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !planModal.hidden) {
+        closePlanModal();
+      }
+    });
+  }
+
   function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
       return navigator.clipboard.writeText(text);

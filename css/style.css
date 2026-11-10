@@ -398,6 +398,12 @@ img {
   background: linear-gradient(170deg, var(--color-bg-card), #fdf0dd);
   border: 2px solid var(--color-primary);
   box-shadow: 0 16px 32px rgba(193, 98, 60, 0.18);
+  cursor: pointer;
+}
+
+.price-card--featured:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 .price-card__badge {
@@ -762,6 +768,81 @@ body.modal-open {
 .modal-close:focus-visible {
   background: var(--color-gold);
   color: #fff;
+}
+
+.modal-plan-badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-gold);
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.modal-plan-badge:empty {
+  display: none;
+}
+
+.modal-plan-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 12px;
+}
+
+.modal-plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin: 0 0 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.modal-plan-price span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-soft);
+}
+
+.modal-plan-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-plan-features li {
+  position: relative;
+  font-size: 14px;
+  color: var(--color-text-soft);
+  line-height: 1.8;
+  padding-left: 24px;
+  margin-bottom: 10px;
+}
+
+.modal-plan-features li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.modal-plan-features li:last-child {
+  margin-bottom: 0;
+}
+
+.modal-plan-features strong {
+  color: var(--color-primary-dark);
 }
 
 @media (max-width: 600px) {
