@@ -323,6 +323,200 @@ img {
   .article-title { font-size: 24px; }
 }
 
+/* Pricing section */
+.pricing-note {
+  margin: -25px 0 32px;
+  font-size: 13px;
+  color: var(--color-text-soft);
+}
+
+.price-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 28px;
+}
+
+.price-card {
+  position: relative;
+  flex: 1 1 300px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 10px 24px rgba(59, 42, 32, 0.08);
+  padding: 32px 28px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(59, 42, 32, 0.16);
+}
+
+.price-card--featured {
+  background: linear-gradient(170deg, var(--color-bg-card), #fdf0dd);
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 16px 32px rgba(193, 98, 60, 0.18);
+}
+
+.price-card__badge {
+  position: absolute;
+  top: -14px;
+  right: 28px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-gold);
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: 0 6px 14px rgba(217, 164, 65, 0.4);
+}
+
+.price-card__name {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 16px;
+}
+
+.price-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0 0 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.price-card__amount {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.price-card__unit {
+  font-size: 12px;
+  color: var(--color-text-soft);
+}
+
+.price-card__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.price-card__features li {
+  position: relative;
+  font-size: 13px;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+  padding-left: 22px;
+  margin-bottom: 10px;
+}
+
+.price-card__features li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.price-card__features li:last-child {
+  margin-bottom: 0;
+}
+
+.price-card__features strong {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+/* Travel agency section */
+.agency-card {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 28px rgba(59, 42, 32, 0.1);
+  padding: 36px;
+}
+
+.agency-card__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--color-accent), #6c7a44);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.agency-card__badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: #f6ded0;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin: 0 0 12px;
+}
+
+.agency-card__name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 12px;
+}
+
+.agency-card__description {
+  font-size: 13px;
+  color: var(--color-text-soft);
+  line-height: 1.8;
+  margin: 0 0 18px;
+}
+
+.agency-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-primary);
+  padding: 10px 22px;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.agency-card__link:hover,
+.agency-card__link:focus-visible {
+  background: var(--color-primary-dark);
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .agency-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 24px;
+  }
+}
+
 /* Coupon section */
 .coupon-grid {
   display: flex;
