@@ -1,4 +1,40 @@
 (function () {
+  const navToggle = document.getElementById("navToggle");
+  const siteNav = document.getElementById("siteNav");
+
+  function closeNav() {
+    siteNav.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
+  }
+
+  if (navToggle && siteNav) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = siteNav.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    siteNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeNav);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && siteNav.classList.contains("is-open")) {
+        closeNav();
+        navToggle.focus();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        siteNav.classList.contains("is-open") &&
+        !siteNav.contains(event.target) &&
+        !navToggle.contains(event.target)
+      ) {
+        closeNav();
+      }
+    });
+  }
+
   const modal = document.getElementById("spotModal");
   const modalImage = document.getElementById("modalImage");
   const modalTitle = document.getElementById("modalTitle");
