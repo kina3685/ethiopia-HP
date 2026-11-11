@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "ethiopia-HP",
+			"path": "."
+		},
+		{
+			"name": "images",
+			"path": "../Echiopia/assets/images"
+		},
+		{
+			"name": "css",
+			"path": "../Echiopia/css"
+		},
+		{
+			"name": "js",
+			"path": "../Echiopia/js"
+		}
+	],
+	"settings": {}
+}
