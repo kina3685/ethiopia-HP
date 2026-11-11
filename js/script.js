@@ -39,6 +39,8 @@
   const modalImage = document.getElementById("modalImage");
   const modalTitle = document.getElementById("modalTitle");
   const modalDescription = document.getElementById("modalDescription");
+  const modalMapWrap = document.getElementById("modalMapWrap");
+  const modalMap = document.getElementById("modalMap");
   const closeButton = document.getElementById("modalClose");
   const cards = document.querySelectorAll(".spot-card");
 
@@ -51,6 +53,14 @@
     modalTitle.textContent = card.dataset.title;
     modalDescription.textContent = card.dataset.description;
 
+    if (card.dataset.map) {
+      modalMap.src = `https://www.google.com/maps?q=${encodeURIComponent(card.dataset.map)}&output=embed`;
+      modalMapWrap.hidden = false;
+    } else {
+      modalMap.src = "";
+      modalMapWrap.hidden = true;
+    }
+
     modal.hidden = false;
     document.body.classList.add("modal-open");
     closeButton.focus();
@@ -59,6 +69,7 @@
   function closeModal() {
     modal.hidden = true;
     document.body.classList.remove("modal-open");
+    modalMap.src = "";
     if (lastFocusedElement) {
       lastFocusedElement.focus();
     }
