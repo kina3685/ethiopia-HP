@@ -1,4 +1,14 @@
 (function () {
+  const heroTrack = document.getElementById("heroTrack");
+  if (heroTrack) {
+    heroTrack.querySelectorAll("img").forEach((img) => {
+      const clone = img.cloneNode(true);
+      clone.removeAttribute("alt");
+      clone.setAttribute("aria-hidden", "true");
+      heroTrack.appendChild(clone);
+    });
+  }
+
   const navToggle = document.getElementById("navToggle");
   const siteNav = document.getElementById("siteNav");
 
@@ -35,6 +45,53 @@
     });
   }
 
+  function createModalController(overlay, closeButton, { onOpen, onClose } = {}) {
+    let lastFocusedElement = null;
+
+    function open(trigger) {
+      lastFocusedElement = trigger;
+      if (onOpen) onOpen(trigger);
+      overlay.hidden = false;
+      document.body.classList.add("modal-open");
+      closeButton.focus();
+    }
+
+    function close() {
+      overlay.hidden = true;
+      document.body.classList.remove("modal-open");
+      if (onClose) onClose();
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+      }
+    }
+
+    closeButton.addEventListener("click", close);
+
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) {
+        close();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !overlay.hidden) {
+        close();
+      }
+    });
+
+    return { open, close };
+  }
+
+  function bindTrigger(trigger, open) {
+    trigger.addEventListener("click", () => open(trigger));
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        open(trigger);
+      }
+    });
+  }
+
   const modal = document.getElementById("spotModal");
   const modalImage = document.getElementById("modalImage");
   const modalTitle = document.getElementById("modalTitle");
@@ -44,60 +101,27 @@
   const closeButton = document.getElementById("modalClose");
   const cards = document.querySelectorAll(".spot-card");
 
-  let lastFocusedElement = null;
+  const spotModalController = createModalController(modal, closeButton, {
+    onOpen(card) {
+      modalImage.src = card.dataset.image;
+      modalImage.alt = card.dataset.title;
+      modalTitle.textContent = card.dataset.title;
+      modalDescription.textContent = card.dataset.description;
 
-  function openModal(card) {
-    lastFocusedElement = card;
-    modalImage.src = card.dataset.image;
-    modalImage.alt = card.dataset.title;
-    modalTitle.textContent = card.dataset.title;
-    modalDescription.textContent = card.dataset.description;
-
-    if (card.dataset.map) {
-      modalMap.src = `https://www.google.com/maps?q=${encodeURIComponent(card.dataset.map)}&output=embed`;
-      modalMapWrap.hidden = false;
-    } else {
-      modalMap.src = "";
-      modalMapWrap.hidden = true;
-    }
-
-    modal.hidden = false;
-    document.body.classList.add("modal-open");
-    closeButton.focus();
-  }
-
-  function closeModal() {
-    modal.hidden = true;
-    document.body.classList.remove("modal-open");
-    modalMap.src = "";
-    if (lastFocusedElement) {
-      lastFocusedElement.focus();
-    }
-  }
-
-  cards.forEach((card) => {
-    card.addEventListener("click", () => openModal(card));
-    card.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openModal(card);
+      if (card.dataset.map) {
+        modalMap.src = `https://www.google.com/maps?q=${encodeURIComponent(card.dataset.map)}&output=embed`;
+        modalMapWrap.hidden = false;
+      } else {
+        modalMap.src = "";
+        modalMapWrap.hidden = true;
       }
-    });
+    },
+    onClose() {
+      modalMap.src = "";
+    },
   });
 
-  closeButton.addEventListener("click", closeModal);
-
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !modal.hidden) {
-      closeModal();
-    }
-  });
+  cards.forEach((card) => bindTrigger(card, spotModalController.open));
 
   const planModal = document.getElementById("planModal");
   const planModalBadge = document.getElementById("planModalBadge");
@@ -107,71 +131,37 @@
   const planModalClose = document.getElementById("planModalClose");
   const planCard = document.getElementById("standardPlanCard");
 
-  let lastFocusedPlanElement = null;
-
-  function openPlanModal(card) {
-    lastFocusedPlanElement = card;
-
-    const badge = card.querySelector(".price-card__badge");
-    const name = card.querySelector(".price-card__name");
-    const amount = card.querySelector(".price-card__amount");
-    const unit = card.querySelector(".price-card__unit");
-    const features = card.querySelectorAll(".price-card__features li");
-
-    planModalBadge.textContent = badge ? badge.textContent : "";
-    planModalTitle.textContent = name ? name.textContent : "";
-    planModalPrice.innerHTML = "";
-    if (amount) {
-      planModalPrice.appendChild(document.createTextNode(amount.textContent));
-    }
-    if (unit) {
-      const unitSpan = document.createElement("span");
-      unitSpan.textContent = unit.textContent;
-      planModalPrice.appendChild(unitSpan);
-    }
-
-    planModalFeatures.innerHTML = "";
-    features.forEach((li) => {
-      const item = document.createElement("li");
-      item.innerHTML = li.innerHTML;
-      planModalFeatures.appendChild(item);
-    });
-
-    planModal.hidden = false;
-    document.body.classList.add("modal-open");
-    planModalClose.focus();
-  }
-
-  function closePlanModal() {
-    planModal.hidden = true;
-    document.body.classList.remove("modal-open");
-    if (lastFocusedPlanElement) {
-      lastFocusedPlanElement.focus();
-    }
-  }
-
   if (planCard && planModal) {
-    planCard.addEventListener("click", () => openPlanModal(planCard));
-    planCard.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openPlanModal(planCard);
-      }
+    const planModalController = createModalController(planModal, planModalClose, {
+      onOpen(card) {
+        const badge = card.querySelector(".price-card__badge");
+        const name = card.querySelector(".price-card__name");
+        const amount = card.querySelector(".price-card__amount");
+        const unit = card.querySelector(".price-card__unit");
+        const features = card.querySelectorAll(".price-card__features li");
+
+        planModalBadge.textContent = badge ? badge.textContent : "";
+        planModalTitle.textContent = name ? name.textContent : "";
+        planModalPrice.innerHTML = "";
+        if (amount) {
+          planModalPrice.appendChild(document.createTextNode(amount.textContent));
+        }
+        if (unit) {
+          const unitSpan = document.createElement("span");
+          unitSpan.textContent = unit.textContent;
+          planModalPrice.appendChild(unitSpan);
+        }
+
+        planModalFeatures.innerHTML = "";
+        features.forEach((li) => {
+          const item = document.createElement("li");
+          item.innerHTML = li.innerHTML;
+          planModalFeatures.appendChild(item);
+        });
+      },
     });
 
-    planModalClose.addEventListener("click", closePlanModal);
-
-    planModal.addEventListener("click", (event) => {
-      if (event.target === planModal) {
-        closePlanModal();
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !planModal.hidden) {
-        closePlanModal();
-      }
-    });
+    bindTrigger(planCard, planModalController.open);
   }
 
   function copyText(text) {
