@@ -7,7 +7,7 @@
   --color-placeholder: #e7d9c3;
   --color-primary: #c1623c;
   --color-primary-dark: #9b4b2c;
-  --color-accent: #8a9a5b;
+  --color-accent: #a3b570;
   --color-gold: #d9a441;
   --color-border: #e6d5bd;
   --font-heading: "Zen Maru Gothic", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
@@ -223,6 +223,7 @@ img {
 .recommend-grid {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 40px;
 }
@@ -252,23 +253,26 @@ img {
 }
 
 .recommend-card h3 {
-  display: inline-block;
+  display: block;
   font-family: var(--font-heading);
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 700;
-  color: #fff;
-  background: var(--color-primary);
-  padding: 4px 14px;
-  border-radius: 999px;
-  margin: 24px 0 0 20px;
+  color: var(--color-text);
+  line-height: 1.4;
+  margin: 24px 20px 0;
 }
 
 .recommend-card p {
-  font-size: 13px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  font-size: 14px;
   font-weight: 500;
   color: var(--color-text-soft);
   line-height: 1.7;
-  margin: 10px 0 24px 23px;
+  margin: 10px 20px 24px;
 }
 
 /* Spots grid (3 cols x 2 rows) */
@@ -311,15 +315,20 @@ img {
   background: var(--color-accent);
   padding: 4px 14px;
   border-radius: 999px;
-  margin: 24px 0 0 20px;
+  margin: 24px 20px 0;
 }
 
 .spot-card p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
   font-size: 13px;
   font-weight: 500;
   color: var(--color-text-soft);
   line-height: 1.7;
-  margin: 10px 0 24px 23px;
+  margin: 10px 20px 24px;
 }
 
 .spot-card:hover,
