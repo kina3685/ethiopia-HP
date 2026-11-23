@@ -8,6 +8,8 @@
   --color-primary: #c1623c;
   --color-primary-dark: #9b4b2c;
   --color-accent: #a3b570;
+  --color-accent-green: #006600;
+  --color-accent-yellow: #FFD700;
   --color-gold: #d9a441;
   --color-border: #e6d5bd;
   --font-heading: "Zen Maru Gothic", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
@@ -148,11 +150,6 @@ img {
   width: max-content;
   height: 100%;
   animation: hero-scroll 130s linear infinite;
-}
-
-.hero:hover .hero-track,
-.hero:hover .hero-track img {
-  animation-play-state: paused;
 }
 
 .hero-track img {
@@ -309,13 +306,16 @@ img {
 .spot-card h3 {
   display: inline-block;
   font-family: var(--font-heading);
-  font-size: 12px;
+  font-size: 22px;
   font-weight: 700;
-  color: #fff;
-  background: var(--color-accent);
-  padding: 4px 14px;
-  border-radius: 999px;
+  color: var(--color-accent-green);
   margin: 24px 20px 0;
+}
+
+.spot-card--c2r1 h3 {
+  color: var(--color-accent-yellow);
+  -webkit-text-stroke: 1px #997a00;
+  paint-order: stroke fill;
 }
 
 .spot-card p {
@@ -900,11 +900,30 @@ body.modal-open {
   margin: 0 0 12px;
 }
 
+.modal-description {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-subheading {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-top: 24px;
+}
+
+.modal-subheading:first-child {
+  margin-top: 0;
+}
+
 .modal p {
   font-size: 14px;
   color: var(--color-text-soft);
-  line-height: 1.7;
+  line-height: 1.8;
   margin: 0;
+  white-space: pre-line;
 }
 
 .modal-map {

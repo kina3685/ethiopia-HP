@@ -101,12 +101,37 @@
   const closeButton = document.getElementById("modalClose");
   const cards = document.querySelectorAll(".spot-card");
 
+  function renderModalDescription(container, text) {
+    container.innerHTML = "";
+    const blocks = (text || "").split(/\n\s*\n/).filter((block) => block.trim() !== "");
+
+    blocks.forEach((block) => {
+      const lines = block.split("\n");
+      const hasHeading = lines.length > 1;
+      const heading = hasHeading ? lines[0].trim() : null;
+      const body = (hasHeading ? lines.slice(1) : lines).join("\n").trim();
+
+      if (heading) {
+        const headingEl = document.createElement("span");
+        headingEl.className = "modal-subheading";
+        headingEl.textContent = heading;
+        container.appendChild(headingEl);
+      }
+
+      if (body) {
+        const bodyEl = document.createElement("p");
+        bodyEl.textContent = body;
+        container.appendChild(bodyEl);
+      }
+    });
+  }
+
   const spotModalController = createModalController(modal, closeButton, {
     onOpen(card) {
       modalImage.src = card.dataset.image;
       modalImage.alt = card.dataset.title;
       modalTitle.textContent = card.dataset.title;
-      modalDescription.textContent = card.dataset.description;
+      renderModalDescription(modalDescription, card.dataset.description);
 
       if (card.dataset.map) {
         modalMap.src = `https://www.google.com/maps?q=${encodeURIComponent(card.dataset.map)}&output=embed`;
@@ -129,9 +154,9 @@
   const planModalPrice = document.getElementById("planModalPrice");
   const planModalFeatures = document.getElementById("planModalFeatures");
   const planModalClose = document.getElementById("planModalClose");
-  const planCard = document.getElementById("standardPlanCard");
+  const planCards = document.querySelectorAll(".price-card");
 
-  if (planCard && planModal) {
+  if (planCards.length && planModal) {
     const planModalController = createModalController(planModal, planModalClose, {
       onOpen(card) {
         const badge = card.querySelector(".price-card__badge");
@@ -161,7 +186,7 @@
       },
     });
 
-    bindTrigger(planCard, planModalController.open);
+    planCards.forEach((card) => bindTrigger(card, planModalController.open));
   }
 
   function copyText(text) {
