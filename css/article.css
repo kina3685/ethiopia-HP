@@ -138,6 +138,35 @@
   color: var(--color-text-soft);
 }
 
+.article-media-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.article-media-row img {
+  flex: 0 0 40%;
+  width: 40%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.article-media-row__text {
+  flex: 1;
+}
+
+.article-media-row__text h3 {
+  margin-top: 0;
+  font-size: 27px;
+}
+
+.article-media-row__text p {
+  margin: 0;
+}
+
 .article-image-gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -157,5 +186,20 @@
   .article-hero { height: 220px; }
   .article-title { font-size: 24px; }
   .article-image-gallery { gap: 8px; }
+
+  .article-media-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .article-media-row img {
+    width: 100%;
+    order: 2;
+  }
+
+  .article-media-row__text {
+    order: 1;
+  }
 }
 
