@@ -7,6 +7,21 @@
       clone.setAttribute("aria-hidden", "true");
       heroTrack.appendChild(clone);
     });
+
+    // Edge等のChromium系ブラウザでは、タブが非表示→再表示されると
+    // CSSアニメーションが固まって再生されないことがあるため、
+    // 再表示時にアニメーションを強制的に再起動する。
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) return;
+      const elements = [heroTrack, ...heroTrack.querySelectorAll("img")];
+      elements.forEach((el) => {
+        el.style.animation = "none";
+      });
+      void heroTrack.offsetHeight;
+      elements.forEach((el) => {
+        el.style.animation = "";
+      });
+    });
   }
 
   const navToggle = document.getElementById("navToggle");
