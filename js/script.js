@@ -101,6 +101,26 @@
   const closeButton = document.getElementById("modalClose");
   const cards = document.querySelectorAll(".spot-card");
 
+  const SAFETY_LINK_TEXT = "「海外安全ホームページ」";
+  const SAFETY_LINK_URL = "https://www.anzen.mofa.go.jp/info/pcinfectionspothazardinfo_095.html#ad-image-0";
+
+  function appendTextWithLinks(parent, text) {
+    const parts = text.split(SAFETY_LINK_TEXT);
+    parts.forEach((part, index) => {
+      if (part) {
+        parent.appendChild(document.createTextNode(part));
+      }
+      if (index < parts.length - 1) {
+        const link = document.createElement("a");
+        link.href = SAFETY_LINK_URL;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = SAFETY_LINK_TEXT;
+        parent.appendChild(link);
+      }
+    });
+  }
+
   function renderModalDescription(container, text) {
     container.innerHTML = "";
     const blocks = (text || "").split(/\n\s*\n/).filter((block) => block.trim() !== "");
@@ -120,7 +140,7 @@
 
       if (body) {
         const bodyEl = document.createElement("p");
-        bodyEl.textContent = body;
+        appendTextWithLinks(bodyEl, body);
         container.appendChild(bodyEl);
       }
     });

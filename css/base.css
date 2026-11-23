@@ -1,0 +1,74 @@
+:root {
+  --color-text: #3b2a20;
+  --color-text-soft: #7a6453;
+  --color-bg: #fbf3e7;
+  --color-bg-card: #fffaf2;
+  --color-bg-footer: #3f2e22;
+  --color-placeholder: #e7d9c3;
+  --color-primary: #c1623c;
+  --color-primary-dark: #9b4b2c;
+  --color-accent: #a3b570;
+  --color-accent-green: #006600;
+  --color-accent-yellow: #FFD700;
+  --color-accent-blue: #0033CC;
+  --color-accent-red: #CC0000;
+  --color-gold: #d9a441;
+  --color-border: #e6d5bd;
+  --font-heading: "Zen Maru Gothic", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --max-width: 1329px;
+  --radius-card: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+
+/* Sections */
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 80px 24px 0;
+}
+
+.section-title {
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 500;
+  margin: 0 0 45px;
+  padding-left: 22px;
+}
+
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  bottom: 0.2em;
+  width: 6px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+}
+
+.section-title--small {
+  font-size: 24px;
+}
+

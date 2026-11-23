@@ -1,0 +1,47 @@
+/* Profile footer */
+.profile-section {
+  margin-top: 80px;
+  background: linear-gradient(160deg, var(--color-bg-footer), #2c2016);
+  color: #f3e6d3;
+  padding: 60px 24px 80px;
+}
+
+.profile-section .section-title {
+  max-width: var(--max-width);
+  margin: 0 auto 40px;
+  color: #f3e6d3;
+}
+
+.profile-section .section-title::before {
+  background: linear-gradient(180deg, var(--color-gold), var(--color-primary));
+}
+
+.profile-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.profile-avatar {
+  width: 133px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid var(--color-gold);
+  flex-shrink: 0;
+}
+
+.profile-info p {
+  font-size: 13px;
+  color: #d9c7b2;
+  margin: 0 0 20px;
+}
+
+.profile-name {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+

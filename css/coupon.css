@@ -1,0 +1,132 @@
+/* Coupon section */
+.coupon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+.coupon-card {
+  position: relative;
+  display: flex;
+  flex: 1 1 320px;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: 0 10px 24px rgba(59, 42, 32, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.coupon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(59, 42, 32, 0.16);
+}
+
+.coupon-card::before,
+.coupon-card::after {
+  content: "";
+  position: absolute;
+  left: 120px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.coupon-card::before { top: -10px; }
+.coupon-card::after { bottom: -10px; }
+
+.coupon-card__rate {
+  position: relative;
+  display: flex;
+  flex: 0 0 120px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff;
+  font-family: var(--font-heading);
+  border-right: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+.coupon-card__percent {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.coupon-card__percent small {
+  font-size: 15px;
+  margin-left: 2px;
+}
+
+.coupon-card__off {
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.coupon-card__body {
+  flex: 1;
+  min-width: 0;
+  padding: 20px 24px;
+}
+
+.coupon-card__body h3 {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 8px;
+}
+
+.coupon-card__body p {
+  font-size: 12px;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+  margin: 0 0 10px;
+}
+
+.coupon-card__code {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: var(--color-placeholder);
+  border: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.coupon-card__code::after {
+  content: "\1F4CB";
+  font-size: 11px;
+}
+
+.coupon-card__code:hover,
+.coupon-card__code:focus-visible {
+  background: var(--color-gold);
+  color: #fff;
+  outline: none;
+}
+
+.coupon-card__code.is-copied {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.coupon-card__code.is-copied::after {
+  content: "\2713";
+}
+
+.coupon-card__expiry {
+  margin: 8px 0 0 !important;
+  font-size: 11px;
+}
+
